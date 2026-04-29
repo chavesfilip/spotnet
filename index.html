@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPOTNET Telecomunicações — Excelência Tecnológica em Angola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0d1f3c;
+    --cyan: #00c8e0;
+    --cyan-light: #4de8f8;
+    --cyan-dim: rgba(0,200,224,0.12);
+    --white: #f4f8ff;
+    --gray: #8a9ab5;
+    --card-bg: rgba(13,31,60,0.7);
+    --border: rgba(0,200,224,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 42px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--cyan); }
+
+  .nav-cta {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.25s;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+
+  .nav-cta:hover {
+    background: var(--cyan);
+    color: var(--navy);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    padding: 8rem 4rem 5rem;
+    overflow: hidden;
+  }
+
+  /* GRID BG */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,224,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,224,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(0,200,224,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    background: var(--cyan-dim);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge span { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s ease infinite; }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--cyan);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    padding: 0.9rem 2.2rem;
+    background: var(--cyan);
+    color: var(--navy);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover::after { opacity: 0.15; }
+
+  .btn-ghost {
+    padding: 0.9rem 2.2rem;
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat {
+    padding: 2.5rem 3rem;
+    border-right: 1px solid var(--border);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h2 span { color: var(--cyan); }
+
+  .section-desc {
+    color: var(--gray);
+    max-width: 600px;
+    margin: 1.2rem auto 0;
+    font-size: 1rem;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 7rem 4rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--navy);
+    padding: 3rem 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--cyan);
+    transition: height 0.4s ease;
+  }
+
+  .service-card:hover { background: var(--navy-mid); }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+    font-size: 1.5rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .service-card:hover .service-icon {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+
+  .service-card p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* ── ADVANTAGE ── */
+  .advantage {
+    padding: 7rem 4rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,200,224,0.03) 50%, transparent 100%);
+  }
+
+  .advantage-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .advantage-visual {
+    position: relative;
+  }
+
+  .adv-shield {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .adv-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    animation: spinSlow 20s linear infinite;
+  }
+
+  .adv-ring:nth-child(2) {
+    inset: 15%;
+    border-color: rgba(0,200,224,0.2);
+    animation-direction: reverse;
+    animation-duration: 15s;
+  }
+
+  .adv-ring:nth-child(3) {
+    inset: 30%;
+    border-color: rgba(0,200,224,0.3);
+    animation-duration: 10s;
+  }
+
+  .adv-center {
+    position: absolute;
+    inset: 40%;
+    background: var(--cyan-dim);
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+
+  .adv-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--cyan);
+    border-radius: 50%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .advantage-items { display: flex; flex-direction: column; gap: 2rem; }
+
+  .adv-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .adv-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 0.1em;
+    padding-top: 0.25rem;
+    min-width: 28px;
+  }
+
+  .adv-item h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .adv-item p {
+    color: var(--gray);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* ── CLIENTS ── */
+  .clients {
+    padding: 6rem 4rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .clients-grid {
+    max-width: 900px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .client-card {
+    background: var(--navy);
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: background 0.3s;
+  }
+
+  .client-card:hover { background: var(--navy-mid); }
+
+  .client-sector {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .client-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .client-desc {
+    color: var(--gray);
+    font-size: 0.85rem;
+  }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial {
+    padding: 7rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .testimonial-card {
+    max-width: 800px;
+    padding: 4rem;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    font-family: 'Syne', sans-serif;
+    font-size: 12rem;
+    color: var(--cyan);
+    opacity: 0.06;
+    position: absolute;
+    top: -2rem;
+    left: 2rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .t-stat {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .t-text {
+    font-size: 1.1rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .t-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .t-author-line {
+    width: 30px;
+    height: 1px;
+    background: var(--cyan);
+  }
+
+  .t-author-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .t-author-role {
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 7rem 4rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(0,200,224,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 { margin-bottom: 1.5rem; max-width: 600px; margin: 0 auto 1.5rem; }
+
+  .cta-section p { color: var(--gray); margin-bottom: 2.5rem; }
+
+  .contact-info {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--gray);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 2rem 4rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .services { padding: 5rem 2rem; }
+    .advantage { padding: 5rem 2rem; }
+    .advantage-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .adv-shield { display: none; }
+    .clients { padding: 5rem 2rem; }
+    .clients-grid { grid-template-columns: 1fr; }
+    .testimonial { padding: 5rem 2rem; }
+    .testimonial-card { padding: 2.5rem; }
+    .cta-section { padding: 5rem 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo.jpg" alt="SPOTNET">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#vantagem">Vantagem Local</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Falar Connosco</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Luanda, Angola · Direito Angolano</div>
+    <h1>Tecnologia de Ponta.<em>Execução Local.</em></h1>
+    <p class="hero-sub">A SPOTNET é o parceiro estratégico que transforma a complexidade tecnológica em vantagem competitiva — com infraestrutura robusta, consultoria ética e soberania operacional total.</p>
+    <div class="hero-btns">
+      <a href="#servicos" class="btn-primary">Conhecer Serviços</a>
+      <a href="assinaturas.html" class="btn-ghost">Solução de Assinaturas</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat reveal"><div class="stat-num">80–90%</div><div class="stat-label">Ganho de eficiência operacional</div></div>
+  <div class="stat reveal"><div class="stat-num">100+</div><div class="stat-label">Países em conformidade legal</div></div>
+  <div class="stat reveal"><div class="stat-num">4</div><div class="stat-label">Sectores críticos servidos</div></div>
+  <div class="stat reveal"><div class="stat-num">AOA</div><div class="stat-label">Faturação em moeda local</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="section-header reveal">
+    <div class="section-tag">O que fazemos</div>
+    <h2>Um ecossistema de serviços<br><span>estratégia e execução</span></h2>
+    <p class="section-desc">Da consultoria especializada ao fornecimento de infraestrutura de alta performance — gerimos ambas as extremidades para garantir a entrega integral.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🔌</div>
+      <h3>Infraestrutura de Rede</h3>
+      <p>Equipamentos de marcas de renome global para máxima resiliência física, segurança estrutural e escalabilidade futura. SLA garantido.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">☁️</div>
+      <h3>Cloud & Alojamento</h3>
+      <p>Eliminamos a necessidade de servidores locais e equipas de TI ultraespecializadas, reduzindo OPEX e o risco de interrupção por falhas de infraestrutura própria.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">✍️</div>
+      <h3>Assinatura Eletrónica</h3>
+      <p>Plataforma integrada para enviar, assinar e gerir contratos ilimitados com blindagem jurídica total, rastreabilidade criptográfica e conformidade em +100 países.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🧠</div>
+      <h3>Consultoria IT Estratégica</h3>
+      <p>Análise setorial profunda em vez de respostas genéricas. Identificamos e resolvemos os gargalos operacionais reais da sua organização.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🔒</div>
+      <h3>Segurança & Conformidade</h3>
+      <p>Operação sob o direito angolano com alinhamento imediato aos quadros legais nacionais, eliminando as barreiras burocráticas de fornecedores internacionais.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">⚙️</div>
+      <h3>Automação de Processos</h3>
+      <p>Fluxos de trabalho sem fricção que libertam capital humano da burocracia e o redirecionam para tarefas de elevado valor estratégico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGE -->
+<section class="advantage" id="vantagem">
+  <div class="advantage-inner">
+    <div class="advantage-visual">
+      <div class="adv-shield">
+        <div class="adv-ring"></div>
+        <div class="adv-ring"></div>
+        <div class="adv-ring"></div>
+        <div class="adv-dot"></div>
+        <div class="adv-center">🛡️</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-tag">A nossa diferença</div>
+      <h2 style="text-align:left; margin-bottom: 2.5rem;">A vantagem da<br><span>soberania operacional</span></h2>
+      <div class="advantage-items">
+        <div class="adv-item reveal">
+          <div class="adv-num">01</div>
+          <div>
+            <h4>Mitigação de Risco Cambial</h4>
+            <p>Faturação inteiramente em Kwanzas (AOA). Proteção total contra a volatilidade do mercado de divisas, com previsibilidade orçamental garantida.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-num">02</div>
+          <div>
+            <h4>Conformidade Regulatória Imediata</h4>
+            <p>Atuamos sob o direito angolano, eliminando as barreiras burocráticas típicas de fornecedores internacionais e garantindo alinhamento legal instantâneo.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-num">03</div>
+          <div>
+            <h4>Suporte Crítico de Proximidade</h4>
+            <p>Sede no Centro de Conferências Belas (Futungo), Luanda. Suporte técnico de alta complexidade no mesmo fuso horário e a uma curta deslocação.</p>
+          </div>
+        </div>
+        <div class="adv-item reveal">
+          <div class="adv-num">04</div>
+          <div>
+            <h4>Continuidade Operacional</h4>
+            <p>Presença física e liderança acessível, responsabilizando-se pessoalmente por cada projeto em curso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clientes">
+  <div class="section-header reveal">
+    <div class="section-tag">Portfólio de elite</div>
+    <h2>Validação institucional em<br><span>sectores críticos</span></h2>
+    <p class="section-desc">A nossa credibilidade é comprovada pelos sectores que servimos — onde a falha técnica simplesmente não é uma opção.</p>
+  </div>
+
+  <div class="clients-grid">
+    <div class="client-card reveal">
+      <div class="client-sector">Sector Energético / Governamental</div>
+      <div class="client-name">Ministério dos Petróleos de Angola</div>
+      <div class="client-desc">Gestão de infraestrutura de segurança nacional e alta disponibilidade.</div>
+    </div>
+    <div class="client-card reveal">
+      <div class="client-sector">Sector Financeiro</div>
+      <div class="client-name">Saham Angola Seguros</div>
+      <div class="client-desc">Conformidade rigorosa com normas do sector financeiro e segurador.</div>
+    </div>
+    <div class="client-card reveal">
+      <div class="client-sector">Sector da Saúde</div>
+      <div class="client-name">Clínica Luanda Medical Center</div>
+      <div class="client-desc">Privacidade e tratamento de dados sensíveis de saúde com padrões internacionais.</div>
+    </div>
+    <div class="client-card reveal">
+      <div class="client-sector">Sector Tecnológico</div>
+      <div class="client-name">Netspace Communications</div>
+      <div class="client-desc">Resiliência em telecomunicações de larga escala com zero latência.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-card reveal">
+    <div class="t-stat">80–90%</div>
+    <p class="t-text">Com a nossa plataforma, as organizações ficam drasticamente mais eficientes em comparação com os processos anteriores. Os níveis de stresse reduzem-se e os líderes ganham tempo para pensar em estratégia e planeamento.</p>
+    <div class="t-author">
+      <div class="t-author-line"></div>
+      <div>
+        <div class="t-author-name">Muadzin Jihad</div>
+        <div class="t-author-role">Cofundador, Forest Beverage Solutions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="section-tag reveal">Pronto para transformar?</div>
+  <h2 class="reveal">Construamos o blueprint da sua <span>transformação digital</span></h2>
+  <p class="reveal">Contacte-nos e inicie o processo. A SPOTNET está pronta para converter a burocracia documental num motor de agilidade competitiva.</p>
+  <div class="hero-btns reveal">
+    <a href="mailto:comercial@spotnet.ao" class="btn-primary">comercial@spotnet.ao</a>
+    <a href="proposta.html" class="btn-ghost">Ver Proposta Completa</a>
+  </div>
+  <div class="contact-info reveal">
+    <div class="contact-item">
+      <div class="contact-label">Email</div>
+      <div class="contact-value">comercial@spotnet.ao</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Sede Operacional</div>
+      <div class="contact-value">Centro de Conferências Belas, Futungo, Luanda</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">Entidade Legal</div>
+      <div class="contact-value">Organização de Direito Angolano</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 SPOTNET Telecomunicações. Todos os direitos reservados.</span>
+  <span style="color: var(--cyan);">Luanda, Angola</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

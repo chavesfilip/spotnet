@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Comercial — Plataforma de Assinatura Eletrónica · SPOTNET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════
+     SCREEN STYLES
+  ═══════════════════════════════════════════ */
+  :root {
+    --navy: #0a1628;
+    --navy2: #0d2040;
+    --cyan: #00c8e0;
+    --cyan2: #00e8ff;
+    --white: #f4f8ff;
+    --gray: #7a8ba8;
+    --gray-light: #b0bed4;
+    --border: #1c3050;
+    --accent-bg: rgba(0,200,224,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #e8edf5;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    color: #1a2840;
+    min-height: 100vh;
+  }
+
+  /* ── SCREEN NAV ── */
+  .screen-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--navy);
+    padding: 0.9rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,200,224,0.15);
+  }
+
+  .screen-nav img { height: 36px; }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn-print {
+    padding: 0.55rem 1.4rem;
+    background: var(--cyan);
+    color: var(--navy);
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .btn-print:hover { opacity: 0.85; }
+
+  .btn-back {
+    padding: 0.55rem 1.2rem;
+    border: 1px solid rgba(0,200,224,0.25);
+    color: #7a8ba8;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.2s;
+  }
+
+  .btn-back:hover { color: var(--cyan); }
+
+  /* ── DOCUMENT WRAPPER ── */
+  .doc-wrapper {
+    max-width: 860px;
+    margin: 5.5rem auto 3rem;
+    background: white;
+    box-shadow: 0 4px 60px rgba(0,0,0,0.12);
+  }
+
+  /* ═══════════════════════════════════════════
+     DOCUMENT CONTENT
+  ═══════════════════════════════════════════ */
+
+  /* COVER PAGE */
+  .cover {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,224,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,224,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .cover-glow {
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,200,224,0.1) 0%, transparent 70%);
+  }
+
+  .cover-header {
+    padding: 2.5rem 3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-header img { height: 50px; }
+
+  .cover-meta {
+    text-align: right;
+  }
+
+  .cover-meta .label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.2rem;
+  }
+
+  .cover-meta .value {
+    font-size: 0.8rem;
+    color: rgba(244,248,255,0.6);
+    font-family: 'DM Sans', monospace;
+  }
+
+  .cover-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(0,200,224,0.3);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+
+  .cover-body h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-body h1 span { color: var(--cyan); }
+
+  .cover-body .subtitle {
+    font-size: 1rem;
+    color: rgba(244,248,255,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .cover-divider {
+    margin: 2.5rem 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    width: 200px;
+  }
+
+  .cover-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .ci-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.3rem;
+  }
+
+  .ci-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .cover-footer {
+    padding: 1.5rem 3rem;
+    border-top: 1px solid rgba(0,200,224,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-footer span {
+    font-size: 0.72rem;
+    color: rgba(244,248,255,0.35);
+    letter-spacing: 0.06em;
+  }
+
+  .cover-footer .conf {
+    color: var(--cyan);
+    border: 1px solid rgba(0,200,224,0.2);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── DOCUMENT SECTIONS ── */
+  .doc-section {
+    padding: 3.5rem 3rem;
+    border-bottom: 1px solid #e8edf5;
+  }
+
+  .doc-section:last-child { border-bottom: none; }
+
+  /* Section labels */
+  .sec-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.6rem;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: #3d5275;
+    margin-bottom: 1rem;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--cyan);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .callout p { color: var(--navy); font-weight: 400; margin: 0; }
+
+  /* ── FEATURE GRID ── */
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .feat-card {
+    border: 1px solid #dde5f0;
+    padding: 1.8rem 1.5rem;
+    position: relative;
+  }
+
+  .feat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--cyan);
+  }
+
+  .feat-card h3 { font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .feat-card p { font-size: 0.85rem; margin: 0; color: var(--gray); }
+
+  .feat-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: var(--accent-bg);
+    padding: 0.15rem 0.5rem;
+    margin-bottom: 0.7rem;
+    border-radius: 2px;
+  }
+
+  /* ── WORKFLOW STEPS ── */
+  .workflow {
+    margin-top: 2rem;
+  }
+
+  .wf-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #f0f4fa;
+  }
+
+  .wf-step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .wf-num {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .wf-content h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+  .wf-content p { font-size: 0.87rem; color: var(--gray); margin: 0; }
+
+  /* ── SECURITY MATRIX ── */
+  .sec-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .sec-item {
+    background: var(--navy);
+    color: var(--white);
+    padding: 2rem 1.8rem;
+  }
+
+  .sec-item .badge {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .sec-item h3 {
+    font-family: 'Syne', sans-serif;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sec-item p {
+    font-size: 0.83rem;
+    color: rgba(244,248,255,0.55);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.88rem;
+  }
+
+  .compare-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .compare-table th:last-child {
+    background: var(--cyan);
+    color: var(--navy);
+  }
+
+  .compare-table td {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid #e8edf5;
+    color: #3d5275;
+    vertical-align: top;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  .compare-table td:first-child {
+    font-weight: 500;
+    color: var(--navy);
+  }
+
+  .compare-table td.highlight {
+    color: var(--navy);
+    font-weight: 400;
+    background: rgba(0,200,224,0.04);
+  }
+
+  .td-bad { color: #c0392b; }
+  .td-good { color: #0a8a5a; }
+
+  /* ── ROI SECTION ── */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #dde5f0;
+    border: 1px solid #dde5f0;
+    margin-top: 2rem;
+  }
+
+  .roi-card {
+    background: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .roi-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .roi-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── PRICING BOX ── */
+  .pricing-box {
+    border: 2px solid var(--navy);
+    margin-top: 2rem;
+    overflow: hidden;
+  }
+
+  .pricing-header {
+    background: var(--navy);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pricing-header h3 {
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .pricing-badge {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    border: 1px solid rgba(0,200,224,0.3);
+    padding: 0.2rem 0.6rem;
+  }
+
+  .pricing-body {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .price-main {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--accent-bg);
+    border: 1px solid rgba(0,200,224,0.15);
+  }
+
+  .price-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .price-currency {
+    font-size: 0.85rem;
+    color: var(--cyan);
+    font-weight: 600;
+    margin-top: 0.3rem;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .price-unit {
+    font-size: 0.78rem;
+    color: var(--gray);
+    margin-top: 0.2rem;
+  }
+
+  .price-includes { }
+
+  .price-includes h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
+  }
+
+  .pi-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+    color: #3d5275;
+  }
+
+  .pi-check {
+    width: 16px;
+    height: 16px;
+    background: var(--cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: white;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .pricing-footer {
+    padding: 1rem 2rem;
+    background: #f8faff;
+    border-top: 1px solid #e8edf5;
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── REFERENCES ── */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .ref-item {
+    border: 1px solid #e8edf5;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ref-sector {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .ref-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .ref-desc {
+    font-size: 0.82rem;
+    color: var(--gray);
+  }
+
+  /* ── SIGNATURE PAGE ── */
+  .sig-page {
+    background: var(--navy);
+    color: var(--white);
+    padding: 3.5rem 3rem;
+  }
+
+  .sig-page h2 { color: var(--white); margin-bottom: 0.5rem; }
+  .sig-page p { color: rgba(244,248,255,0.55); }
+
+  .sig-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .sig-block { }
+
+  .sig-party {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.4rem;
+  }
+
+  .sig-name-block {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .sig-title-block {
+    font-size: 0.82rem;
+    color: rgba(244,248,255,0.45);
+    margin-bottom: 3rem;
+  }
+
+  .sig-line {
+    border-top: 1px solid rgba(0,200,224,0.3);
+    padding-top: 0.5rem;
+    font-size: 0.72rem;
+    color: rgba(244,248,255,0.3);
+    letter-spacing: 0.06em;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,200,224,0.12);
+  }
+
+  .cg-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.3rem;
+  }
+
+  .cg-value {
+    font-size: 0.85rem;
+    color: rgba(244,248,255,0.7);
+  }
+
+  /* ═══════════════════════════════════════════
+     PRINT STYLES
+  ═══════════════════════════════════════════ */
+  @media print {
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    .screen-nav { display: none !important; }
+
+    body {
+      background: white;
+      font-size: 11pt;
+    }
+
+    .doc-wrapper {
+      margin: 0;
+      max-width: 100%;
+      box-shadow: none;
+    }
+
+    .cover {
+      min-height: 100vh;
+      page-break-after: always;
+    }
+
+    .doc-section {
+      page-break-inside: avoid;
+    }
+
+    .feat-grid, .sec-matrix, .roi-grid, .ref-grid {
+      page-break-inside: avoid;
+    }
+
+    .sig-page {
+      page-break-before: always;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .cover-grid { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SCREEN NAV (hidden on print) -->
+<nav class="screen-nav">
+  <img src="logo.jpg" alt="SPOTNET">
+  <div class="nav-actions">
+    <a href="assinaturas.html" class="btn-back">← Solução</a>
+    <a href="index.html" class="btn-back">← Início</a>
+    <button class="btn-print" onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
+  </div>
+</nav>
+
+<!-- DOCUMENT -->
+<div class="doc-wrapper">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-grid"></div>
+    <div class="cover-glow"></div>
+
+    <div class="cover-header">
+      <img src="logo.jpg" alt="SPOTNET Telecomunicações">
+      <div class="cover-meta">
+        <div class="label">Referência</div>
+        <div class="value">SPOT-ASS-2025-001</div>
+      </div>
+    </div>
+
+    <div class="cover-body">
+      <div class="cover-tag">
+        <span>●</span> Proposta Comercial Confidencial
+      </div>
+
+      <h1>Plataforma de<br>Assinatura <span>Digital</span><br>Empresarial</h1>
+
+      <p class="subtitle">Modernização de fluxos documentais com segurança jurídica total, rastreabilidade criptográfica e conformidade internacional — suportada por infraestrutura local em Angola.</p>
+
+      <div class="cover-divider"></div>
+
+      <div class="cover-info">
+        <div>
+          <div class="ci-label">Fornecedor</div>
+          <div class="ci-value">SPOTNET Telecomunicações</div>
+        </div>
+        <div>
+          <div class="ci-label">Data</div>
+          <div class="ci-value">Luanda, 2025</div>
+        </div>
+        <div>
+          <div class="ci-label">Validade</div>
+          <div class="ci-value">30 Dias</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <span>comercial@spotnet.ao · Centro de Conferências Belas, Futungo, Luanda</span>
+      <div class="conf">Confidencial</div>
+    </div>
+  </div>
+
+  <!-- 1. ENQUADRAMENTO -->
+  <div class="doc-section">
+    <div class="sec-label">01 · Enquadramento Estratégico</div>
+    <h2>O Problema que Resolvemos</h2>
+
+    <p>No atual ecossistema económico de Angola, a transformação digital deixou de ser um objetivo aspiracional para se tornar o pilar central da continuidade de negócio. As grandes organizações enfrentam diariamente o que denominamos <strong>"Capital Morto"</strong>: investimentos em processos e ferramentas que não comunicam entre si e falham em gerar valor tangível.</p>
+
+    <div class="callout">
+      <p><strong>A burocracia documental em papel é o maior dreno de capital humano de uma organização.</strong> O custo logístico de estafetas, o gasto com consumíveis, o risco de liquidez por atraso na assinatura de contratos de venda e a exposição cambial de soluções estrangeiras representam um encargo operacional que pode ser completamente eliminado.</p>
+    </div>
+
+    <p>A SPOTNET TELECOMUNICAÇÕES posiciona-se como o parceiro estratégico para mitigar este risco, unindo consultoria ética de alta complexidade à execução técnica rigorosa, com uma vantagem fundamental: somos uma organização de direito angolano, com faturação integralmente em Kwanzas (AOA) e sede em Luanda.</p>
+  </div>
+
+  <!-- 2. SOLUÇÃO -->
+  <div class="doc-section">
+    <div class="sec-label">02 · A Solução Proposta</div>
+    <h2>Plataforma de Assinatura Eletrónica Integrada</h2>
+
+    <p>A nossa plataforma de assinatura digital é uma solução completa para o envio, assinatura e gestão de contratos ilimitados — um fluxo de trabalho intuitivo desenhado para garantir velocidade, inclusão digital e rigorosa conformidade legal.</p>
+
+    <p>A transição para a assinatura digital não visa apenas a digitalização: trata-se da <strong>blindagem jurídica de cada decisão empresarial</strong>, com um rastro de evidências inquestionável que pode servir como prova admissível em tribunal.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-badge">Simplicidade</div>
+        <h3>Templates Dinâmicos</h3>
+        <p>Construção via drag & drop com campos pré-preenchidos e modelos reutilizáveis para contratos repetitivos.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-badge">Automação</div>
+        <h3>Fluxos Sem Papel</h3>
+        <p>Eliminação de consumíveis, estafetas e processos manuais. Notificações automáticas e arquivo imediato.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-badge">Flexibilidade</div>
+        <h3>Multi-dispositivo</h3>
+        <p>Assinatura em segundos via smartphone, tablet ou desktop — iOS, Android e web.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-badge">Escalabilidade</div>
+        <h3>Ecossistema Expansível</h3>
+        <p>Integração futura com módulos de CRM, Contabilidade ou RH, evitando silos tecnológicos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. WORKFLOW -->
+  <div class="doc-section">
+    <div class="sec-label">03 · Funcionamento</div>
+    <h2>Dinâmica do Workflow Sem Fricção</h2>
+
+    <p>O processo foi desenhado para respeitar a hierarquia organizacional e garantir rastreabilidade total em cada etapa:</p>
+
+    <div class="workflow">
+      <div class="wf-step">
+        <div class="wf-num">01</div>
+        <div class="wf-content">
+          <h3>Criação Dinâmica do Documento</h3>
+          <p>O responsável cria o documento via interface drag & drop com campos dinâmicos pré-preenchidos a partir dos dados da organização, eliminando erros de preenchimento manual.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">02</div>
+        <div class="wf-content">
+          <h3>Definição de Múltiplas Funções</h3>
+          <p>O sistema permite configurar quem assina, quem aprova e quem recebe apenas "Cópia Carbono", respeitando a hierarquia da organização. A versão correta é enviada a cada interveniente consoante o seu cargo.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">03</div>
+        <div class="wf-content">
+          <h3>Ordem de Assinatura Sequencial</h3>
+          <p>Notificações sequenciais automáticas. Os utilizadores só são alertados quando é a sua vez de assinar, eliminando confusão e garantindo conformidade com o fluxo aprovado.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">04</div>
+        <div class="wf-content">
+          <h3>Automação de Lembretes e Arquivo</h3>
+          <p>Agendamento automático de alertas para signatários pendentes e arquivo imediato com auto-save no fecho do contrato, disponível para todas as partes a qualquer momento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SEGURANÇA -->
+  <div class="doc-section">
+    <div class="sec-label">04 · Segurança e Conformidade Legal</div>
+    <h2>Matriz de Blindagem Jurídica</h2>
+
+    <p>A integridade documental é o alicerce da confiança institucional. A nossa solução oferece quatro camadas de proteção que garantem a validade jurídica de cada documento assinado:</p>
+
+    <div class="sec-matrix">
+      <div class="sec-item">
+        <span class="badge">Legalidade & Identificação</span>
+        <h3>100% Legal — +100 Países</h3>
+        <p>Conformidade total com o Regulamento eIDAS (UE 910/2014) e Lei ESIGN (EUA). Válida em mais de 100 jurisdições, garantindo validade jurídica para contratos transfronteiriços.</p>
+      </div>
+      <div class="sec-item">
+        <span class="badge">Autenticação</span>
+        <h3>Autenticação Multifatorial</h3>
+        <p>Links exclusivos e pessoais associados ao email do signatário, com verificação adicional via SMS (código de 6 dígitos) e integração com serviços de identidade digital certificados.</p>
+      </div>
+      <div class="sec-item">
+        <span class="badge">Rastreabilidade</span>
+        <h3>Log de Auditoria Permanente</h3>
+        <p>Cada interação — leitura, assinatura, edição — é registada com geolocalização e carimbo de data/hora. Arquivo imutável admissível como prova em tribunal.</p>
+      </div>
+      <div class="sec-item">
+        <span class="badge">Integridade</span>
+        <h3>Selo Criptográfico</h3>
+        <p>Os documentos são selados digitalmente após cada ação. Qualquer tentativa de alteração posterior invalida instantaneamente a assinatura, garantindo integridade absoluta.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. COMPARAÇÃO -->
+  <div class="doc-section">
+    <div class="sec-label">05 · Posicionamento Competitivo</div>
+    <h2>SPOTNET vs. Fornecedor Estrangeiro</h2>
+
+    <p>A tabela seguinte compara o modelo SPOTNET com fornecedores internacionais de software equivalente, evidenciando a vantagem estrutural de uma parceria local:</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>Fornecedor Estrangeiro</th>
+          <th>Modelo SPOTNET</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exposição Financeira</td>
+          <td class="td-bad">Alto risco cambial (USD/EUR)</td>
+          <td class="highlight td-good">Zero risco — faturação em AOA</td>
+        </tr>
+        <tr>
+          <td>Suporte Técnico</td>
+          <td class="td-bad">Remoto e fragmentado</td>
+          <td class="highlight td-good">On-site em Luanda, mesmo fuso horário</td>
+        </tr>
+        <tr>
+          <td>Conformidade Legal</td>
+          <td class="td-bad">Barreiras burocráticas locais</td>
+          <td class="highlight td-good">Alinhamento imediato com direito angolano</td>
+        </tr>
+        <tr>
+          <td>Integração de Sistemas</td>
+          <td class="td-bad">Silos isolados</td>
+          <td class="highlight td-good">Ecossistema unificado (Cloud + Software)</td>
+        </tr>
+        <tr>
+          <td>Previsibilidade OPEX</td>
+          <td class="td-bad">Custos ocultos de manutenção</td>
+          <td class="highlight td-good">Pacote fixo e previsível em AOA</td>
+        </tr>
+        <tr>
+          <td>Responsabilidade</td>
+          <td class="td-bad">Ponto de contacto difuso</td>
+          <td class="highlight td-good">Liderança diretamente acessível</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. ROI -->
+  <div class="doc-section">
+    <div class="sec-label">06 · Retorno sobre Investimento</div>
+    <h2>O Custo da Inação vs. O Investimento</h2>
+
+    <p>O verdadeiro custo de manter processos manuais é invariavelmente superior ao investimento na digitalização. A análise de ROI considera os custos eliminados versus o investimento mensal consolidado:</p>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-num">80–90%</div>
+        <div class="roi-label">Ganho de eficiência operacional documentado</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">0 AOA</div>
+        <div class="roi-label">Exposição cambial — faturação em moeda local</div>
+      </div>
+      <div class="roi-card">
+        <div class="roi-num">+100</div>
+        <div class="roi-label">Países com validade jurídica reconhecida</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 1.5rem;">
+      <p><strong>Custos eliminados com a implementação:</strong> Estafetas e logística de entrega de documentos, consumíveis (papel, toner, impressoras), atrasos no fecho de contratos de venda (risco de liquidez), exposição cambial de licenças em divisas estrangeiras, e equipas de TI para manutenção de servidores locais.</p>
+    </div>
+  </div>
+
+  <!-- 7. PROPOSTA ECONÓMICA -->
+  <div class="doc-section">
+    <div class="sec-label">07 · Proposta Económica</div>
+    <h2>Estrutura de Investimento</h2>
+
+    <p>A nossa estrutura de custos é desenhada para oferecer previsibilidade máxima e escalabilidade, consolidando licenciamento, infraestrutura em nuvem e suporte técnico num único custo mensal fixo.</p>
+
+    <div class="pricing-box">
+      <div class="pricing-header">
+        <h3>Pacote Corporativo — Plataforma de Assinatura Digital</h3>
+        <div class="pricing-badge">75 Utilizadores / Contas</div>
+      </div>
+      <div class="pricing-body">
+        <div class="price-main">
+          <div class="price-amount">20.000</div>
+          <div class="price-currency">Kwanzas (AOA)</div>
+          <div class="price-unit">por conta / mês</div>
+        </div>
+        <div class="price-includes">
+          <h4>Serviços Incluídos</h4>
+          <div class="pi-item">
+            <div class="pi-check">✓</div>
+            <span>Licenciamento integral da plataforma de assinatura eletrónica</span>
+          </div>
+          <div class="pi-item">
+            <div class="pi-check">✓</div>
+            <span>Alojamento seguro em nuvem com backups automáticos</span>
+          </div>
+          <div class="pi-item">
+            <div class="pi-check">✓</div>
+            <span>Manutenção e SLA de infraestrutura cloud gerida pela SPOTNET</span>
+          </div>
+          <div class="pi-item">
+            <div class="pi-check">✓</div>
+            <span>Suporte técnico on-site em Luanda</span>
+          </div>
+          <div class="pi-item">
+            <div class="pi-check">✓</div>
+            <span>Conformidade legal em Angola e +100 países</span>
+          </div>
+        </div>
+      </div>
+      <div class="pricing-footer">
+        Convergência financeira: um único fornecedor, uma única moeda, zero surpresas operacionais.
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. REFERÊNCIAS -->
+  <div class="doc-section">
+    <div class="sec-label">08 · Prova de Capacidade</div>
+    <h2>Portfólio de Referências em Sectores Críticos</h2>
+
+    <p>A credibilidade da SPOTNET é comprovada pela complexidade dos sectores que servimos — onde a falha técnica simplesmente não é uma opção:</p>
+
+    <div class="ref-grid">
+      <div class="ref-item">
+        <div class="ref-sector">Sector Energético / Governamental</div>
+        <div class="ref-name">Ministério dos Petróleos de Angola</div>
+        <div class="ref-desc">Gestão de infraestrutura de segurança nacional com alta disponibilidade e tolerância zero a falhas.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-sector">Sector Financeiro</div>
+        <div class="ref-name">Saham Angola Seguros</div>
+        <div class="ref-desc">Conformidade rigorosa com normas do sector financeiro e de seguros e proteção de dados sensíveis.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-sector">Sector da Saúde</div>
+        <div class="ref-name">Clínica Luanda Medical Center</div>
+        <div class="ref-desc">Tratamento de dados sensíveis de saúde sob padrões internacionais de privacidade e segurança.</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-sector">Sector Tecnológico</div>
+        <div class="ref-name">Netspace Communications</div>
+        <div class="ref-desc">Resiliência em comunicações de larga escala com suporte à espinha dorsal das telecomunicações comerciais.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. PRÓXIMOS PASSOS -->
+  <div class="doc-section">
+    <div class="sec-label">09 · Próximos Passos</div>
+    <h2>Inicio da Implementação</h2>
+
+    <p>A modernização proposta pela SPOTNET TELECOMUNICAÇÕES representa a convergência entre tecnologia de ponta e conhecimento profundo do terreno angolano. Estamos prontos para transformar a burocracia documental de um centro de custos num motor de agilidade competitiva.</p>
+
+    <p>Para dar início ao processo, propomos os seguintes passos:</p>
+
+    <div class="workflow" style="margin-top: 1.5rem;">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div class="wf-content">
+          <h3>Reunião de Validação Técnica</h3>
+          <p>Sessão para mapeamento dos fluxos documentais existentes e definição dos perfis de utilizador e hierarquias de assinatura.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div class="wf-content">
+          <h3>Aprovação da Proposta e Contrato</h3>
+          <p>Formalização do acordo comercial com assinatura do contrato de serviços — naturalmente, pela nossa própria plataforma digital.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div class="wf-content">
+          <h3>Implementação e Formação</h3>
+          <p>Configuração da plataforma, migração de templates existentes e sessão de formação para utilizadores-chave da organização.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div class="wf-content">
+          <h3>Go-Live e Acompanhamento</h3>
+          <p>Entrada em produção com suporte técnico dedicado da equipa SPOTNET durante o período de arranque.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNATURE PAGE -->
+  <div class="sig-page">
+    <div class="sec-label" style="color: var(--cyan);">Aceitação da Proposta</div>
+    <h2>Declaração de Compromisso</h2>
+    <p style="max-width: 600px; margin-top: 0.8rem;">A Direção da SPOTNET TELECOMUNICAÇÕES reitera o seu compromisso com a excelência profissional e o respeito pelos interesses estratégicos dos nossos clientes. A aceitação desta proposta inicia formalmente o processo de transformação digital.</p>
+
+    <div class="sig-blocks">
+      <div class="sig-block">
+        <div class="sig-party">Fornecedor</div>
+        <div class="sig-name-block">SPOTNET Telecomunicações</div>
+        <div class="sig-title-block">Organização de Direito Angolano</div>
+        <div class="sig-line">Assinatura e Carimbo · Data: _______________</div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-party">Cliente</div>
+        <div class="sig-name-block">___________________________</div>
+        <div class="sig-title-block">Organização / Cargo</div>
+        <div class="sig-line">Assinatura e Carimbo · Data: _______________</div>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="cg-label">Email Comercial</div>
+        <div class="cg-value">comercial@spotnet.ao</div>
+      </div>
+      <div>
+        <div class="cg-label">Sede Operacional</div>
+        <div class="cg-value">Centro de Conferências Belas, Futungo, Luanda</div>
+      </div>
+      <div>
+        <div class="cg-label">Validade da Proposta</div>
+        <div class="cg-value">30 dias a partir da data de emissão</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end doc-wrapper -->
+
+</body>
+</html>
